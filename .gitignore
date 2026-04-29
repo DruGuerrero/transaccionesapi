@@ -1,0 +1,34 @@
+## Visual Studio local files (NEVER commit these)
+.vs/
+
+## Build outputs
+bin/
+obj/
+
+## NuGet packages
+*.nupkg
+*.snupkg
+packages/
+!**/packages/repositories.config
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider
+.idea/
+*.sln.iml
+
+## dotnet publish
+**/publish/
+
+## Secrets & environment
+*.env
+appsettings.Development.json
+appsettings.Local.json
+
+## OS files
+.DS_Store
+Thumbs.db

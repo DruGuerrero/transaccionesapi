@@ -1,48 +1,35 @@
 ﻿using Ardalis.ApiEndpoints;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using Transacciones.Core.Interfaces.Account;
+using Transacciones.Core.Models.Account.CreateAccount;
 
 namespace Transacciones.API.Endpoints
 {
-    [Route("/users")]
-    public class CreateAccountEndpoint : EndpointBaseAsync.WithRequest<CreateUserRequest>.WithActionResult
+    [Route("/cuentas")]
+    public class CreateAccountEndpoint : EndpointBaseAsync.WithRequest<CreateAccountRequest>.WithActionResult
     {
-        private readonly ICreateUserUseCase _createUserUseCase;
+        private readonly ICreateAccountUseCase _createAccountUseCase;
 
-        public CreateAccountEndpoint(ICreateUserUseCase createUserUseCase)
+        public CreateAccountEndpoint(ICreateAccountUseCase createAccountUseCase)
         {
-            _createUserUseCase = createUserUseCase;
+            _createAccountUseCase = createAccountUseCase;
         }
 
         [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [SwaggerOperation(
-            Summary = "Pre-create a user",
-            Description = "Creates a user record before they log in with Google. Email and username are set on first login.",
-            Tags = ["Users"])]
+            Summary = "Crear una nueva cuenta",
+            Description = "Crea una nueva cuenta para realizar transacciones.",
+            Tags = ["Cuentas"])]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public override async Task<ActionResult> HandleAsync(CreateUserRequest request, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult> HandleAsync(CreateAccountRequest request, CancellationToken cancellationToken = default)
         {
             try
             {
-                var dto = new CreateUserDto
-                {
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    Email = request.Email,
-                    RoleId = request.RoleId,
-                    BranchId = request.BranchId,
-                    UserProfile = request.UserProfile is null ? null : new Core.Models.Users.UserProfile
-                    {
-                        AdvisorErpCode = request.UserProfile.AdvisorErpCode,
-                        AdvisorAioCode = request.UserProfile.AdvisorAioCode
-                    }
-                };
-
-                var result = await _createUserUseCase.ExecuteAsync(dto, cancellationToken);
-                return Created($"/users/{result.Id}", new CreateUserResponse(result.Id, result.FirstName, result.LastName, result.RoleId, result.BranchId));
+                var result = await _createAccountUseCase.ExecuteAsync(request, cancellationToken);
+                return Created($"/cuentas/{result.Id}", new CreateAccountResponse(result.Id, result.AccountNumber, result.Balance, result.Holder, result.CreatedAt, result.IsActive));
             }
             catch (InvalidOperationException ex)
             {

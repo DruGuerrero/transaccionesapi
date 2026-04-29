@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SbbJsnrer84=",
+  "dgSpecHash": "MwiYJMLO+vc=",
   "success": true,
   "projectFilePath": "C:\\Dev\\dotnet projects\\Transacciones.API\\Transacciones.API\\Transacciones.API.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\an1dr\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.7\\microsoft.extensions.dependencyinjection.abstractions.10.0.7.nupkg.sha512",
     "C:\\Users\\an1dr\\.nuget\\packages\\microsoft.openapi\\2.4.1\\microsoft.openapi.2.4.1.nupkg.sha512",
     "C:\\Users\\an1dr\\.nuget\\packages\\swashbuckle.aspnetcore\\10.1.7\\swashbuckle.aspnetcore.10.1.7.nupkg.sha512",
+    "C:\\Users\\an1dr\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\10.1.7\\swashbuckle.aspnetcore.annotations.10.1.7.nupkg.sha512",
     "C:\\Users\\an1dr\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.1.7\\swashbuckle.aspnetcore.swagger.10.1.7.nupkg.sha512",
     "C:\\Users\\an1dr\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.1.7\\swashbuckle.aspnetcore.swaggergen.10.1.7.nupkg.sha512",
     "C:\\Users\\an1dr\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\10.1.7\\swashbuckle.aspnetcore.swaggerui.10.1.7.nupkg.sha512",
