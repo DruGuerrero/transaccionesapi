@@ -5,7 +5,7 @@ using Transacciones.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAPI();
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

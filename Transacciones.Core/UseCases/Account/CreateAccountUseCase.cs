@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +11,14 @@ namespace Transacciones.Core.UseCases.Account
     {
         public Task<CreateAccountResponse> ExecuteAsync(CreateAccountRequest request, CancellationToken cancellationToken = default)
         {
-            Task.CompletedTask.Wait();
-            return Task.FromResult(new CreateAccountResponse
-            {
-                Id = request.Id,
-                AccountNumber = request.AccountNumber,
-                Balance = request.Balance,
-                Holder = request.Holder,
-                CreatedAt = request.CreatedAt,
-                IsActive = request.IsActive
-            });
+            return Task.FromResult(new CreateAccountResponse(
+                request.Id,
+                request.AccountNumber,
+                request.Balance,
+                request.Holder,
+                request.CreatedAt,
+                request.IsActive
+            ));
         }
 
     }
