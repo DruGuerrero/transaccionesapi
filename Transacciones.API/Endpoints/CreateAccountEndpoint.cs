@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Transacciones.Core.Interfaces.Account;
@@ -20,7 +20,7 @@ namespace Transacciones.API.Endpoints
         [SwaggerOperation(
             Summary = "Crear una nueva cuenta",
             Description = "Crea una nueva cuenta para realizar transacciones.",
-            Tags = ["Cuentas"])]
+            Tags = new[] { "Cuentas" })]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
