@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5r+Q82IzMCE=",
+  "success": true,
+  "projectFilePath": "C:\\Dev\\dotnet projects\\Transacciones.API\\Transacciones.Infrastructure\\Transacciones.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\an1dr\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.7\\microsoft.extensions.dependencyinjection.abstractions.10.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}
