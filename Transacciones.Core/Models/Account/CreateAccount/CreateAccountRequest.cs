@@ -6,6 +6,5 @@ public record CreateAccountRequest(
     [property: JsonPropertyName("numeroCuenta")] string AccountNumber,
     [property: JsonPropertyName("saldo")] decimal Balance,
     [property: JsonPropertyName("titular")] string Holder,
-    [property: JsonPropertyName("fechaCreacion")] DateTime CreatedAt,
     [property: JsonPropertyName("activa")] bool IsActive
 );
