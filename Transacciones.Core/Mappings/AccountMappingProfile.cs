@@ -1,5 +1,6 @@
 using AutoMapper;
 using Transacciones.Core.Entities.Account;
+using Transacciones.Core.Models.Account;
 using Transacciones.Core.Models.Account.CreateAccount;
 
 namespace Transacciones.Core.Mappings;
@@ -10,8 +11,8 @@ public class AccountMappingProfile : Profile
     {
         CreateMap<CreateAccountRequest, Accounts>();
 
-        CreateMap<Accounts, CreateAccountResponse>()
-            .ConstructUsing(src => new CreateAccountResponse(
+        CreateMap<Accounts, AccountResponse>()
+            .ConstructUsing(src => new AccountResponse(
                 src.Id,
                 src.AccountNumber,
                 src.Balance,

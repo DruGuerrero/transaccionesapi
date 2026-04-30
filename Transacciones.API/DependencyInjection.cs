@@ -12,6 +12,7 @@ public static class DependencyInjection
     public static IServiceCollection AddAPI(this IServiceCollection services)
     {
         services.AddScoped<ICreateAccountUseCase, CreateAccountUseCase>();
+        services.AddScoped<IGetAccountByIdUseCase, GetAccountByIdUseCase>();
 
         services.AddValidatorsFromAssemblyContaining<CreateAccountValidator>();
 

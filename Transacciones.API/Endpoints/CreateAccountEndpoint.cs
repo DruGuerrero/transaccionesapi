@@ -7,7 +7,7 @@ using Transacciones.Core.Models.Account.CreateAccount;
 
 namespace Transacciones.API.Endpoints
 {
-    [Route("/cuentas")]
+    [Route("/api/cuentas")]
     public class CreateAccountEndpoint : EndpointBaseAsync.WithRequest<CreateAccountRequest>.WithActionResult
     {
         private readonly ICreateAccountUseCase _createAccountUseCase;
