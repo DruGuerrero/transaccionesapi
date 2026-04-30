@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 using Transacciones.Core.Entities.Account;
 using Transacciones.Core.Interfaces;
 using Transacciones.Core.Interfaces.Account;
@@ -13,32 +9,20 @@ namespace Transacciones.Core.UseCases.Account;
 public class CreateAccountUseCase : ICreateAccountUseCase
 {
     private readonly IRepository<Accounts> _repository;
+    private readonly IMapper _mapper;
 
-    public CreateAccountUseCase(IRepository<Accounts> repository)
+    public CreateAccountUseCase(IRepository<Accounts> repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     public async Task<CreateAccountResponse> ExecuteAsync(CreateAccountRequest request, CancellationToken cancellationToken = default)
     {
-        var account = new Accounts
-        {
-            AccountNumber = request.AccountNumber,
-            Balance = request.Balance,
-            Holder = request.Holder,
-            CreatedAt = request.CreatedAt,
-            IsActive = request.IsActive
-        };
+        var account = _mapper.Map<Accounts>(request);
 
         await _repository.AddAsync(account, cancellationToken);
 
-        return new CreateAccountResponse(
-            account.Id,
-            account.AccountNumber,
-            account.Balance,
-            account.Holder,
-            account.CreatedAt,
-            account.IsActive
-        );
+        return _mapper.Map<CreateAccountResponse>(account);
     }
 }
