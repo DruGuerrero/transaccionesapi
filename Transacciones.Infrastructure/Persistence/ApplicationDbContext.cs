@@ -10,7 +10,7 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    public DbSet<Accounts> Account => Set<Accounts>();
+    public DbSet<Accounts> Accounts => Set<Accounts>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
