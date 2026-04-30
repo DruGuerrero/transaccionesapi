@@ -2,7 +2,7 @@
 {
     public class Accounts
     {
-        public required Guid Id { get; set; }
+        public Guid Id { get; set; }
         public required string AccountNumber { get; set; }
         public required decimal Balance { get; set; }
         public required string Holder { get; set; }

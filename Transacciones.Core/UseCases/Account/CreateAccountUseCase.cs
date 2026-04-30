@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
 using Transacciones.Core.Entities.Account;
+
+using Transacciones.Core.Entities.Account.Specifications;
 using Transacciones.Core.Interfaces;
 using Transacciones.Core.Interfaces.Account;
 using Transacciones.Core.Models.Account.CreateAccount;
@@ -13,33 +11,33 @@ namespace Transacciones.Core.UseCases.Account;
 public class CreateAccountUseCase : ICreateAccountUseCase
 {
     private readonly IRepository<Accounts> _repository;
+    private readonly IReadRepository<Accounts> _readRepository;
+    private readonly IMapper _mapper;
 
-    public CreateAccountUseCase(IRepository<Accounts> repository)
+    public CreateAccountUseCase(
+        IRepository<Accounts> repository, 
+        IReadRepository<Accounts> readRepository,
+        IMapper mapper)
     {
         _repository = repository;
+        _readRepository = readRepository;
+        _mapper = mapper;
     }
 
     public async Task<CreateAccountResponse> ExecuteAsync(CreateAccountRequest request, CancellationToken cancellationToken = default)
     {
-        var account = new Accounts
+        var spec = new AccountByNumberSpec(request.AccountNumber);
+        var exists = await _readRepository.AnyAsync(spec, cancellationToken);
+        
+        if (exists)
         {
-            Id = request.Id,
-            AccountNumber = request.AccountNumber,
-            Balance = request.Balance,
-            Holder = request.Holder,
-            CreatedAt = request.CreatedAt,
-            IsActive = request.IsActive
-        };
+            throw new InvalidOperationException($"Ya existe una cuenta con el número de cuenta {request.AccountNumber}");
+        }
+
+        var account = _mapper.Map<Accounts>(request);
 
         await _repository.AddAsync(account, cancellationToken);
 
-        return new CreateAccountResponse(
-            account.Id,
-            account.AccountNumber,
-            account.Balance,
-            account.Holder,
-            account.CreatedAt,
-            account.IsActive
-        );
+        return _mapper.Map<CreateAccountResponse>(account);
     }
 }
