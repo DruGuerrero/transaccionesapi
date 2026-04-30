@@ -19,8 +19,7 @@ namespace Transacciones.API.Endpoints
         [HttpPost]
         [SwaggerOperation(
             Summary = "Crear una nueva cuenta",
-            Description = "Crea una nueva cuenta para realizar transacciones.",
-            Tags = new[] { "Cuentas" })]
+            Description = "Crea una nueva cuenta para realizar transacciones.")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

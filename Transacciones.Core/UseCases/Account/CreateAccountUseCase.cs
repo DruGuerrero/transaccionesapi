@@ -23,7 +23,6 @@ public class CreateAccountUseCase : ICreateAccountUseCase
     {
         var account = new Accounts
         {
-            Id = request.Id,
             AccountNumber = request.AccountNumber,
             Balance = request.Balance,
             Holder = request.Holder,
