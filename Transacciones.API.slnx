@@ -2,4 +2,5 @@
   <Project Path="Transacciones.API/Transacciones.API.csproj" />
   <Project Path="Transacciones.Core/Transacciones.Core.csproj" />
   <Project Path="Transacciones.Infrastructure/Transacciones.Infrastructure.csproj" />
+  <Project Path="Transacciones.Tests/Transacciones.Tests.csproj" Id="1930714f-a76f-43de-8c1a-f3c84b6295a4" />
 </Solution>

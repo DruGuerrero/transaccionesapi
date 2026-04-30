@@ -9,16 +9,19 @@ public class AccountMappingProfile : Profile
 {
     public AccountMappingProfile()
     {
-        CreateMap<CreateAccountRequest, Accounts>();
+        CreateMap<CreateAccountRequest, Accounts>()
+            .ForMember(account => account.CreatedAt, opt => opt.Ignore());
+
+        CreateMap<Accounts, CreateAccountResponse>();
 
         CreateMap<Accounts, AccountResponse>()
-            .ConstructUsing(src => new AccountResponse(
-                src.Id,
-                src.AccountNumber,
-                src.Balance,
-                src.Holder,
-                src.CreatedAt,
-                src.IsActive
+            .ConstructUsing(srcAccount => new AccountResponse(
+                srcAccount.Id,
+                srcAccount.AccountNumber,
+                srcAccount.Balance,
+                srcAccount.Holder,
+                srcAccount.CreatedAt,
+                srcAccount.IsActive
             ));
     }
 }
