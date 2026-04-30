@@ -11,6 +11,9 @@ namespace Transacciones.Core.Entities.Transaction
         public required DateTime TransactionDate { get; set; } = DateTime.UtcNow;
         public required string Description { get; set; }
 
+        public required decimal PreviousBalance { get; set; }
+        public required decimal NewBalance { get; set; }
+
         public Accounts Account { get; set; } = null!;
     }
 }

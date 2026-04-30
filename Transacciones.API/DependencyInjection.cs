@@ -4,6 +4,7 @@ using Transacciones.Core.Interfaces.Account;
 using Transacciones.Core.Mappings;
 using Transacciones.Core.UseCases.Account;
 using Transacciones.Core.Validators.Account;
+using Transacciones.Core.Validators.Transaction;
 
 namespace Transacciones.API;
 
@@ -15,6 +16,7 @@ public static class DependencyInjection
         services.AddScoped<IGetAccountByIdUseCase, GetAccountByIdUseCase>();
 
         services.AddValidatorsFromAssemblyContaining<CreateAccountValidator>();
+        services.AddValidatorsFromAssemblyContaining<MakeDepositRequestValidator>();
 
         services.AddAutoMapper(cfg => cfg.AddProfile<AccountMappingProfile>());
 

@@ -1,33 +1,35 @@
-using Ardalis.ApiEndpoints;
+﻿using Ardalis.ApiEndpoints;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Transacciones.Core.Interfaces.Account;
+using Transacciones.Core.Interfaces.Transaction;
 using Transacciones.Core.Models.Account.CreateAccount;
+using Transacciones.Core.Models.Transaction.MakeDeposit;
 
 namespace Transacciones.API.Endpoints
 {
-    [Route("/api/cuentas")]
-    public class CreateAccountEndpoint : EndpointBaseAsync.WithRequest<CreateAccountRequest>.WithActionResult
+    [Route("/api/transacciones/abono")]
+    public class MakeDepositEndpoint : EndpointBaseAsync.WithRequest<MakeDepositRequest>.WithActionResult
     {
-        private readonly ICreateAccountUseCase _createAccountUseCase;
-        private readonly IValidator<CreateAccountRequest> _validator;
+        private readonly IMakeDepositUseCase _makeDepositUseCase;
+        private readonly IValidator<MakeDepositRequest> _validator;
 
-        public CreateAccountEndpoint(ICreateAccountUseCase createAccountUseCase, IValidator<CreateAccountRequest> validator)
+        public MakeDepositEndpoint(IMakeDepositUseCase makeDepositUseCase, IValidator<MakeDepositRequest> validator)
         {
-            _createAccountUseCase = createAccountUseCase;
+            _makeDepositUseCase = makeDepositUseCase;
             _validator = validator;
         }
 
         [HttpPost]
         [SwaggerOperation(
-            Summary = "Crear una nueva cuenta",
-            Description = "Crea una nueva cuenta para realizar transacciones.")]
+            Summary = "Realiza un abono de dinero a una cuenta dado CuentaId",
+            Description = "Realiza una transacción de tipo ABONO para la cuenta dada por medio del Id de cuenta.")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public override async Task<ActionResult> HandleAsync(CreateAccountRequest request, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult> HandleAsync(MakeDepositRequest request, CancellationToken cancellationToken = default)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
             if (!validationResult.IsValid)
@@ -37,8 +39,8 @@ namespace Transacciones.API.Endpoints
 
             try
             {
-                var result = await _createAccountUseCase.ExecuteAsync(request, cancellationToken);
-                return Created($"/api/cuentas/{result.Id}", new CreateAccountResponse(result.Id, result.AccountNumber, result.Balance, result.Holder, result.CreatedAt, result.IsActive));
+                var result = await _makeDepositUseCase.ExecuteAsync(request, cancellationToken);
+                return Created($"/api/transacciones/{result.Id}", result);
             }
             catch (InvalidOperationException ex)
             {
