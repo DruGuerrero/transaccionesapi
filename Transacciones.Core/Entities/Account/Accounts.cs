@@ -1,4 +1,6 @@
-﻿namespace Transacciones.Core.Entities.Account
+using Transacciones.Core.Entities.Transaction;
+
+namespace Transacciones.Core.Entities.Account
 {
     public class Accounts
     {
@@ -9,5 +11,7 @@
         public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public required bool IsActive { get; set; } = true;
         public DateTime UpdatedAt { get; set; }
+        
+        public ICollection<Transactions> Transactions { get; set; } = new List<Transactions>();
     }
 }
