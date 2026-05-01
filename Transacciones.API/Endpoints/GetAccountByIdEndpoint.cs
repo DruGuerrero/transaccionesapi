@@ -22,6 +22,8 @@ public class GetAccountByIdEndpoint : EndpointBaseAsync.WithRequest<Guid>.WithAc
         Description = "Devuelve los detalles de una cuenta específica.")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
     public override async Task<ActionResult<AccountResponse>> HandleAsync(Guid id, CancellationToken cancellationToken = default)
     {
         try
