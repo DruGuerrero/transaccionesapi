@@ -2,6 +2,7 @@ using AutoMapper;
 using Transacciones.Core.Entities.Transaction;
 using Transacciones.Core.Models.Transaction.MakeDeposit;
 using Transacciones.Core.Models.Transaction.MakeWithdrawal;
+using Transacciones.Core.Models.Transaction;
 
 namespace Transacciones.Core.Mappings;
 
@@ -28,5 +29,7 @@ public class TransactionMappingProfile : Profile
             .ForMember(dest => dest.Account, opt => opt.Ignore());
 
         CreateMap<Transactions, MakeWithdrawalResponse>();
+
+        CreateMap<Transactions, TransactionResponse>();
     }
 }
