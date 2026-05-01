@@ -1,0 +1,19 @@
+$kind: http-request
+name: Realizar Retiro
+method: POST
+url: '{{baseUrl}}/api/transacciones/retiro'
+description: 'Realiza una transacción de tipo RETIRO para la cuenta dada por medio del Id de cuenta.'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: x-api-key
+    value: '{{apiKey}}'
+body:
+  type: json
+  content: |-
+    {
+      "cuentaId": "{{cuentaId}}",
+      "monto": 200,
+      "descripcion": "Retiro de efectivo"
+    }
