@@ -1,0 +1,9 @@
+$kind: http-request
+name: Obtener Transacciones por Cuenta
+method: GET
+url: '{{baseUrl}}/api/transacciones/cuenta/{{cuentaId}}'
+description: 'Devuelve una lista de transacciones asociadas a una cuenta específica.'
+order: 3000
+headers:
+  - key: x-api-key
+    value: '{{apiKey}}'
