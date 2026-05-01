@@ -1,0 +1,14 @@
+name: 'Transacciones API - Local'
+values:
+  - key: baseUrl
+    value: 'http://localhost:5195'
+    enabled: true
+    type: default
+  - key: apiKey
+    value: ''
+    enabled: true
+    type: default
+  - key: cuentaId
+    value: ''
+    enabled: true
+    type: default
