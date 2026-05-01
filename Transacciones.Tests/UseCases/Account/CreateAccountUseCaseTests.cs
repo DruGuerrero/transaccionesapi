@@ -14,6 +14,7 @@ public class CreateAccountUseCaseTests
 {
     private readonly IRepository<Accounts> _repository;
     private readonly IReadRepository<Accounts> _readRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly ILogger<CreateAccountUseCase> _logger;
     private readonly CreateAccountUseCase _createAccountUseCase;
@@ -22,9 +23,10 @@ public class CreateAccountUseCaseTests
     {
         _repository = Substitute.For<IRepository<Accounts>>();
         _readRepository = Substitute.For<IReadRepository<Accounts>>();
+        _unitOfWork = Substitute.For<IUnitOfWork>();
         _mapper = Substitute.For<IMapper>();
         _logger = Substitute.For<ILogger<CreateAccountUseCase>>();
-        _createAccountUseCase = new CreateAccountUseCase(_repository, _readRepository, _mapper, _logger);
+        _createAccountUseCase = new CreateAccountUseCase(_repository, _readRepository, _unitOfWork, _mapper, _logger);
     }
 
     [Fact]

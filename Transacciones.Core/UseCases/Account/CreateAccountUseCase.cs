@@ -12,17 +12,20 @@ public class CreateAccountUseCase : ICreateAccountUseCase
 {
     private readonly IRepository<Accounts> _repository;
     private readonly IReadRepository<Accounts> _readRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly ILogger<CreateAccountUseCase> _logger;
 
     public CreateAccountUseCase(
         IRepository<Accounts> repository, 
         IReadRepository<Accounts> readRepository,
+        IUnitOfWork unitOfWork,
         IMapper mapper,
         ILogger<CreateAccountUseCase> logger)
     {
         _repository = repository;
         _readRepository = readRepository;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
         _logger = logger;
     }
@@ -43,6 +46,7 @@ public class CreateAccountUseCase : ICreateAccountUseCase
         var account = _mapper.Map<Accounts>(request);
 
         await _repository.AddAsync(account, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         _logger.LogInformation("Account {AccountNumber} created successfully.", request.AccountNumber);
 

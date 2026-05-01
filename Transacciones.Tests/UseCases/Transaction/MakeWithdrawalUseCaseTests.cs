@@ -16,6 +16,7 @@ public class MakeWithdrawalUseCaseTests
     private readonly IReadRepository<Accounts> _readAccountRepository;
     private readonly IRepository<Transactions> _transactionRepository;
     private readonly IReadRepository<Transactions> _readTransactionRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly ILogger<MakeWithdrawalUseCase> _logger;
     private readonly MakeWithdrawalUseCase _useCase;
@@ -26,6 +27,7 @@ public class MakeWithdrawalUseCaseTests
         _readAccountRepository = Substitute.For<IReadRepository<Accounts>>();
         _transactionRepository = Substitute.For<IRepository<Transactions>>();
         _readTransactionRepository = Substitute.For<IReadRepository<Transactions>>();
+        _unitOfWork = Substitute.For<IUnitOfWork>();
         _mapper = Substitute.For<IMapper>();
         _logger = Substitute.For<ILogger<MakeWithdrawalUseCase>>();
         _useCase = new MakeWithdrawalUseCase(
@@ -33,6 +35,7 @@ public class MakeWithdrawalUseCaseTests
             _readAccountRepository,
             _transactionRepository,
             _readTransactionRepository,
+            _unitOfWork,
             _mapper,
             _logger);
     }
