@@ -1,0 +1,9 @@
+$kind: http-request
+name: Obtener Cuenta por ID
+method: GET
+url: '{{baseUrl}}/api/cuentas/{{cuentaId}}'
+description: 'Devuelve los detalles de una cuenta específica.'
+order: 2000
+headers:
+  - key: x-api-key
+    value: '{{apiKey}}'

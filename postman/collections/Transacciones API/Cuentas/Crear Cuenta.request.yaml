@@ -1,0 +1,20 @@
+$kind: http-request
+name: Crear Cuenta
+method: POST
+url: '{{baseUrl}}/api/cuentas'
+description: 'Crea una nueva cuenta para realizar transacciones.'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: x-api-key
+    value: '{{apiKey}}'
+body:
+  type: json
+  content: |-
+    {
+      "numeroCuenta": "1234567890",
+      "saldo": 1000,
+      "titular": "Andres Guerrero",
+      "activa": true
+    }

@@ -1,0 +1,19 @@
+$kind: http-request
+name: Realizar Abono
+method: POST
+url: '{{baseUrl}}/api/transacciones/abono'
+description: 'Realiza una transacción de tipo ABONO para la cuenta dada por medio del Id de cuenta.'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: x-api-key
+    value: '{{apiKey}}'
+body:
+  type: json
+  content: |-
+    {
+      "cuentaId": "{{cuentaId}}",
+      "monto": 500,
+      "descripcion": "Abono inicial"
+    }

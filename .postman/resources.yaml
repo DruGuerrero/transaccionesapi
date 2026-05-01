@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 0d365ac9-6389-4a80-8329-9218f5ba433d
+
+localResources:
+  specs:
+    - ..\Transacciones.API\obj\Debug\net8.0\EndpointInfo\Transacciones.API.json

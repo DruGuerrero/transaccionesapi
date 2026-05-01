@@ -1,0 +1,3 @@
+$kind: collection
+name: Transacciones
+description: 'Endpoints para gestión de transacciones.'
