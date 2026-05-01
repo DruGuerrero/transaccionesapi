@@ -1,7 +1,17 @@
 # Use this workspace to collaborate
 workspace:
-  id: 0d365ac9-6389-4a80-8329-9218f5ba433d
+  id: ""
 
 localResources:
   specs:
     - ..\Transacciones.API\obj\Debug\net8.0\EndpointInfo\Transacciones.API.json
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  specs:
+    ..\Transacciones.API\obj\Debug\net8.0\EndpointInfo\Transacciones.API.json: f9753fd5-d4e3-4970-a0f5-08f881c32ecf
+  environments:
+    ..\postman\environments\Transacciones API - Local.environment.yaml: 44460017-a4fc7df1-ae34-4de8-aa76-027ea1245be6
+  collections:
+    ..\postman\collections\Transacciones API: 44460017-4deea24c-12a1-4e27-812f-cb4a4ec74020

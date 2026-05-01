@@ -51,12 +51,51 @@ API para el manejo de transacciones financieras, construida con .NET 8 siguiendo
 
 ---
 
+## Arquitectura del Proyecto
+
+El proyecto sigue los principios de **Clean Architecture**, separando las responsabilidades en capas bien definidas:
+
+```text
+📂 Transacciones.API/
+├── 📁 Transacciones.API/           # Capa de Presentación (Endpoints y Configuración)
+│   ├── 📁 Endpoints/               # Implementación de endpoints usando Ardalis.Endpoints
+│   └── Program.cs                  # Configuración de servicios y middleware
+├── 📁 Transacciones.Core/          # Capa de Dominio (Lógica de negocio pura)
+│   ├── 📁 Entities/                # Entidades de dominio (Account, Transaction)
+│   ├── 📁 Interfaces/              # Contratos de repositorios y casos de uso
+│   ├── 📁 Models/                  # DTOs (Requests y Responses)
+│   └── 📁 UseCases/                # Implementación de la lógica de negocio
+├── 📁 Transacciones.Infrastructure/ # Capa de Infraestructura (Persistencia y Datos)
+│   ├── 📁 Persistence/             # DbContext y configuraciones de EF Core
+│   └── 📁 Repositories/            # Implementación de acceso a datos
+└── 📁 Transacciones.Tests/          # Pruebas unitarias
+```
+
+
+### Estructura de Carpetas
+*   **Transacciones.API:** Punto de entrada, configuración de servicios y definición de Endpoints.
+*   **Transacciones.Core:** El "corazón" del sistema. Contiene las reglas de negocio, entidades y definiciones de interfaces.
+*   **Transacciones.Infrastructure:** Implementaciones de acceso a datos, persistencia y servicios externos.
+*   **Transacciones.Tests:** Pruebas unitarias asegurar la calidad del código.
+
+---
+
+## Diseño de Base de Datos
+
+A continuación se muestra el diagrama de la base de datos que sustenta la API:
+
+![Diagrama de Base de Datos](./docs/images/Diagrama%20de%20base%20de%20datos.jpg)
+
+---
+
 ## Decisiones Técnicas
+
+
 
 *   **NEON (Postgres):** Elegido por su capacidad de escalado serverless y rapidez en la configuración inicial.
 *   **Ardalis Endpoints:** Usando el patrón **REPR** para evitar controladores "gordos" y cumplir estrictamente con el Principio de Responsabilidad Única (SRP).
 *   **UseCase Pattern:** Desacoplamiento de la lógica de negocio de la infraestructura y de la capa de API, facilitando el mantenimiento y las pruebas unitarias.
-*   **API Key Auth:** Implementado como un middleware ligero para asegurar los endpoints de manera rápida.
+*   **API Key Auth:** Implementado como un middleware ligero para asegurar los endpoints de manera rápida. (Se deberá colocar el api key en swagger cuando se quiera realizar algun request)
 
 ---
 
@@ -72,7 +111,9 @@ API para el manejo de transacciones financieras, construida con .NET 8 siguiendo
 *   `POST /api/transacciones/retiro` - Registrar un egreso de fondos.
 
 
-> [!NOTE]
-> La documentación interactiva está disponible vía Swagger al ejecutar el proyecto en modo desarrollo.
+---
 
+## Pruebas y Documentación
 
+*   **Swagger:** Al ejecutar el proyecto, puedes acceder a la documentación interactiva en `/swagger/index.html`.
+*   **Postman:** El proyecto incluye una carpeta `postman` con las colecciones y configuraciones necesarias. De igual manera, la colección exportada se compartirá por correo electrónico para facilitar la importación directa.

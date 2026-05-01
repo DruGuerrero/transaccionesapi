@@ -1,0 +1,188 @@
+{
+  "info": {
+    "_postman_id": "4deea24c-12a1-4e27-812f-cb4a4ec74020",
+    "name": "Transacciones API",
+    "description": "Colección para gestionar cuentas y transacciones de la API Transacciones.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "44460017",
+    "_collection_link": "https://go.postman.co/collection/44460017-4deea24c-12a1-4e27-812f-cb4a4ec74020?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Cuentas",
+      "item": [
+        {
+          "name": "Crear Cuenta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-api-key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"1234567890\",\n  \"saldo\": 1000,\n  \"titular\": \"Andres Guerrero\",\n  \"activa\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cuentas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cuentas"
+              ]
+            },
+            "description": "Crea una nueva cuenta para realizar transacciones."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Cuenta por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/cuentas/{{cuentaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cuentas",
+                "{{cuentaId}}"
+              ]
+            },
+            "description": "Devuelve los detalles de una cuenta específica."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints para gestión de cuentas."
+    },
+    {
+      "name": "Transacciones",
+      "item": [
+        {
+          "name": "Realizar Abono",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-api-key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cuentaId\": \"{{cuentaId}}\",\n  \"monto\": 500,\n  \"descripcion\": \"Abono inicial\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/transacciones/abono",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "transacciones",
+                "abono"
+              ]
+            },
+            "description": "Realiza una transacción de tipo ABONO para la cuenta dada por medio del Id de cuenta."
+          },
+          "response": []
+        },
+        {
+          "name": "Realizar Retiro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-api-key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cuentaId\": \"{{cuentaId}}\",\n  \"monto\": 200,\n  \"descripcion\": \"Retiro de efectivo\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/transacciones/retiro",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "transacciones",
+                "retiro"
+              ]
+            },
+            "description": "Realiza una transacción de tipo RETIRO para la cuenta dada por medio del Id de cuenta."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener Transacciones por Cuenta",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/transacciones/cuenta/{{cuentaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "transacciones",
+                "cuenta",
+                "{{cuentaId}}"
+              ]
+            },
+            "description": "Devuelve una lista de transacciones asociadas a una cuenta específica."
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints para gestión de transacciones."
+    }
+  ]
+}
