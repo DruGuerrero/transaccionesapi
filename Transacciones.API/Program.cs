@@ -1,9 +1,14 @@
 using Microsoft.OpenApi;
 using Transacciones.API;
 using Transacciones.Infrastructure;
-
+using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext()
+    .WriteTo.Console());
 builder.Services.AddAPI();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
@@ -36,6 +41,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseSerilogRequestLogging();
 
 app.MapControllers();
 

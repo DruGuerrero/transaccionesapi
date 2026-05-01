@@ -12,11 +12,13 @@ namespace Transacciones.API.Endpoints
     {
         private readonly ICreateAccountUseCase _createAccountUseCase;
         private readonly IValidator<CreateAccountRequest> _validator;
+        private readonly ILogger<CreateAccountEndpoint> _logger;
 
-        public CreateAccountEndpoint(ICreateAccountUseCase createAccountUseCase, IValidator<CreateAccountRequest> validator)
+        public CreateAccountEndpoint(ICreateAccountUseCase createAccountUseCase, IValidator<CreateAccountRequest> validator, ILogger<CreateAccountEndpoint> logger)
         {
             _createAccountUseCase = createAccountUseCase;
             _validator = validator;
+            _logger = logger;
         }
 
         [HttpPost]
