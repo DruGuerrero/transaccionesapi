@@ -6,6 +6,7 @@ using Transacciones.Core.Interfaces;
 using Transacciones.Core.Models.Account.CreateAccount;
 using Transacciones.Core.UseCases.Account;
 using Ardalis.Specification;
+using Microsoft.Extensions.Logging;
 
 namespace Transacciones.Tests.UseCases.Account;
 
@@ -14,6 +15,7 @@ public class CreateAccountUseCaseTests
     private readonly IRepository<Accounts> _repository;
     private readonly IReadRepository<Accounts> _readRepository;
     private readonly IMapper _mapper;
+    private readonly ILogger<CreateAccountUseCase> _logger;
     private readonly CreateAccountUseCase _createAccountUseCase;
 
     public CreateAccountUseCaseTests()
@@ -21,7 +23,8 @@ public class CreateAccountUseCaseTests
         _repository = Substitute.For<IRepository<Accounts>>();
         _readRepository = Substitute.For<IReadRepository<Accounts>>();
         _mapper = Substitute.For<IMapper>();
-        _createAccountUseCase = new CreateAccountUseCase(_repository, _readRepository, _mapper);
+        _logger = Substitute.For<ILogger<CreateAccountUseCase>>();
+        _createAccountUseCase = new CreateAccountUseCase(_repository, _readRepository, _mapper, _logger);
     }
 
     [Fact]
