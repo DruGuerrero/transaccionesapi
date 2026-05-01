@@ -42,13 +42,13 @@ namespace Transacciones.Core.UseCases.Transaction
             account.Balance = newBalance;
             account.UpdatedAt = DateTime.UtcNow;
 
-            await _accountRepository.UpdateAsync(account, cancellationToken);
-
             var transaction = _mapper.Map<Transactions>(request);
             transaction.PreviousBalance = previousBalance;
             transaction.NewBalance = newBalance;
 
             await _transactionRepository.AddAsync(transaction, cancellationToken);
+
+            await _accountRepository.UpdateAsync(account, cancellationToken);
 
             return _mapper.Map<MakeDepositResponse>(transaction);
         }
