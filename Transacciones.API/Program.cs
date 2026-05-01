@@ -15,9 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
-    .ReadFrom.Services(services)
-    .Enrich.FromLogContext()
-    .WriteTo.Console());
+    .ReadFrom.Services(services));
 
 builder.Services.AddAPI();
 builder.Services.AddInfrastructure(builder.Configuration);
