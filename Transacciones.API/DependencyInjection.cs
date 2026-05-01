@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IGetAccountByIdUseCase, GetAccountByIdUseCase>();
         services.AddScoped<IMakeDepositUseCase, MakeDepositUseCase>();
         services.AddScoped<IMakeWithdrawalUseCase, MakeWithdrawalUseCase>();
+        services.AddScoped<IListTransactionsByAccountUseCase, ListTransactionsByAccountUseCase>();
 
         services.AddValidatorsFromAssemblyContaining<CreateAccountValidator>();
         services.AddValidatorsFromAssemblyContaining<MakeDepositRequestValidator>();

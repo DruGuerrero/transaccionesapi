@@ -14,6 +14,7 @@ namespace Transacciones.Core.UseCases.Transaction
         private readonly IReadRepository<Accounts> _readAccountRepository;
         private readonly IRepository<Transactions> _transactionRepository;
         private readonly IReadRepository<Transactions> _readTransactionRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<MakeDepositUseCase> _logger;
 
@@ -22,6 +23,7 @@ namespace Transacciones.Core.UseCases.Transaction
             IReadRepository<Accounts> readAccountRepository,
             IRepository<Transactions> transactionRepository,
             IReadRepository<Transactions> readTransactionRepository,
+            IUnitOfWork unitOfWork,
             IMapper mapper,
             ILogger<MakeDepositUseCase> logger)
         {
@@ -29,6 +31,7 @@ namespace Transacciones.Core.UseCases.Transaction
             _readAccountRepository = readAccountRepository;
             _transactionRepository = transactionRepository;
             _readTransactionRepository = readTransactionRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }
@@ -60,9 +63,19 @@ namespace Transacciones.Core.UseCases.Transaction
             transaction.PreviousBalance = previousBalance;
             transaction.NewBalance = newBalance;
 
-            await _transactionRepository.AddAsync(transaction, cancellationToken);
-
-            await _accountRepository.UpdateAsync(account, cancellationToken);
+            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+            try
+            {
+                await _transactionRepository.AddAsync(transaction, cancellationToken);
+                await _accountRepository.UpdateAsync(account, cancellationToken);
+                await _unitOfWork.CommitTransactionAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing deposit transaction for account {AccountId}", request.AccountId);
+                await _unitOfWork.RollbackTransactionAsync(cancellationToken);
+                throw;
+            }
 
             _logger.LogInformation("Deposit of {Amount} successfully made to account {AccountId}", request.Amount, request.AccountId);
 
